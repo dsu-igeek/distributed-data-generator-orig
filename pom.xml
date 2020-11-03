@@ -168,8 +168,8 @@
 							<Class-Path>.</Class-Path>
 						</manifestEntries>
 					</archive>
- 
-					<finalName>${workerDir}/opt/share/kibishii/kibishii</finalName>
+					<outputDirectory>${kibishiiInstallDir}</outputDirectory>
+					<finalName>kibishii</finalName> 
     args: [ "while true; do sleep 30; done;" ]
 				</configuration>
 			</plugin>

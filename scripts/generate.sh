@@ -16,11 +16,12 @@ do
 done
 echo "{\"opID\":\"$OPID\",\"cmd\":\"generate\",\"levels\":\"$LEVELS\",\"dirsPerLevel\":\"$DIRSPERLEVEL\",\"filesPerLevel\":\"$FILESPERLEVEL\",\"fileLength\":\"$FILELENGTH\",\"blockSize\":\"$BLOCKSIZE\",\"passNum\":\"$PASSNUM\"}" | etcdctl put /kibishii/control --endpoints=http://etcd-client:2379
 STATUS="running"
+NODES_COMPLETED=0
 while [ "$STATUS" = 'running' ]
 do
 	sleep 10
 	STATUS=`etcdctl get /kibishii/ops/$OPID --endpoints=http://etcd-client:2379 --print-value-only | jq ".status" | sed -e 's/"//g'`
-	NODES_COMPLETED=`etcdctl get /kibishii/ops/1604383660 --endpoints=http://etcd-client:2379 --print-value-only | jq ".nodesCompleted" | sed -e 's/"//g'`
+	NODES_COMPLETED=`etcdctl get /kibishii/ops/$OPID --endpoints=http://etcd-client:2379 --print-value-only | jq ".nodesCompleted" | sed -e 's/"//g'`
 done
 if [ "$NODES_COMPLETED" -ne "$NODES" ] 
 then

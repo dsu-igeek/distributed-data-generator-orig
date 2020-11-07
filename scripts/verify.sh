@@ -21,7 +21,7 @@ while [ "$STATUS" = 'running' ]
 do
 	sleep 10
 	STATUS=`etcdctl get /kibishii/ops/$OPID --endpoints=http://etcd-client:2379 --print-value-only | jq ".status" | sed -e 's/"//g'`
-	NODES_COMPLETED=`etcdctl get /kibishii/ops/1604383660 --endpoints=http://etcd-client:2379 --print-value-only | jq ".nodesCompleted" | sed -e 's/"//g'`
+	NODES_COMPLETED=`etcdctl get /kibishii/ops/$OPID --endpoints=http://etcd-client:2379 --print-value-only | jq ".nodesCompleted" | sed -e 's/"//g'`
 done
 if [ "$NODES_COMPLETED" -ne "$NODES" ] 
 then

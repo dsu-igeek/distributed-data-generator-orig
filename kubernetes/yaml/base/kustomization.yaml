@@ -4,4 +4,4 @@ kind: Kustomization
 resources:
   - etcd.yaml
   - jump-pad.yaml
-  - kibishii-1g.yaml
+  - kibishii.yaml
